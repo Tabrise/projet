@@ -18,6 +18,10 @@
     z-index: 99;
 }
 
+.descri{
+    justify-content: flex-start;
+}
+
 
 /*** Spinner ***/
 #spinner {
