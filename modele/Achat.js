@@ -17,10 +17,6 @@ const Achat = sequelize.define('Achat', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    idUser:{
-        type:DataTypes.STRING,
-        allowNull:false
-    }
 },{
     freezeTableName: true
 })
