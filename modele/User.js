@@ -1,5 +1,6 @@
-const sequelize = require('../database/database')
+const sequelize = require('../database/db')
 const { DataTypes } = require('sequelize')
+const Achat = require('./Achat')
 
 const User = sequelize.define('User', {
     // une colonne:
@@ -34,5 +35,8 @@ const User = sequelize.define('User', {
 },{
     freezeTableName: true
 })
+
+User.hasMany(Achat)
+Achat.belongsTo(User)
 
 module.exports = User

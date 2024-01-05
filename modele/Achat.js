@@ -1,7 +1,7 @@
 const sequelize = require('../database/db')
 const { DataTypes } = require('sequelize')
 
-const Options = sequelize.define('Options', {
+const Achat = sequelize.define('Achat', {
     // une colonne:
     id: {
         type: DataTypes.INTEGER,
@@ -9,16 +9,19 @@ const Options = sequelize.define('Options', {
         primaryKey: true,
         autoIncrement: true
     },
-    nom:{
-        type: DataTypes.STRING,
+    dateAchat:{
+        type: DataTypes.DATE,
         allowNull: false
     },
-    prixOption:{
+    prix:{
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    idUser:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
 },{
     freezeTableName: true
 })
-
-module.exports = Options
+module.exports = Achat
