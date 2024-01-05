@@ -6,3 +6,30 @@ exports.CreateModele = async(req,res)=>{
     result.save()
     res.statuts(201).json(result.nom)
 }
+
+exports.UpdateModel = async(req, res)=>{
+    let idP = parseInt(req.params.id)
+    let modele = req.body
+    
+    let result = await Modele.update({etagereId: modele.id},{
+        where: {
+            id: idP
+        }
+    })
+    res.status(200).json(result)
+}
+
+exports.allModele = async (req,res)=>{
+    const modele= await Modele.findAll()
+    res.statuts(200).json(modele)
+}
+
+exports.findModele = async(req,res)=>{
+    const modele = await Modele.findByPk(parseInt(req.params.id))
+    res.status(200).json(modele)
+}
+
+exports.delete = async(req,res)=>{
+    const modele = await Modele.findByPk(parseInt(req.params.id))
+    await modele.destroy()
+}
