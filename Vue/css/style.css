@@ -18,6 +18,15 @@
     z-index: 99;
 }
 
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.descri{
+    text-align: left;
+}
+
 
 /*** Spinner ***/
 #spinner {
