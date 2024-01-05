@@ -3,11 +3,11 @@ require('dotenv').config()
 const db = require('../database/db')
 const Cookies = require('cookies')
 
-const cookies = new Cookies(req, res)
+
 
 
 exports.authenticator = (req, res, next) => {
-
+    const cookies = new Cookies(req, res)
     const token = req.headers.authorization === undefined ? cookies.get('token') : req.headers.authorization
     if (token && process.env.SECRET_KEY) {
         jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {

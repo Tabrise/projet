@@ -12,6 +12,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'Vue')));
 app.use('/database', databaseRoute)
 
+const userRoute = require('./routes/userRoute')
+app.use('/user', userRoute)
+
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname+"/vue/index.html");// *<- ici mathieu
