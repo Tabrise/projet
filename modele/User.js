@@ -15,7 +15,7 @@ const User = sequelize.define('User', {
         allowNull: false
     },
     prenom:{
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false
     },
     email:{
