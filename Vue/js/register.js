@@ -21,19 +21,16 @@ document.getElementById('RegisterForm').addEventListener('submit', async functio
             }),
         });
 
-        const data = await response.json();
-
-        if (data.token) {
-            localStorage.setItem('jwtToken', data.token);
-            // Stocker le token dans un cookie
-            document.cookie = `jwtToken=${data.token}; path=/; expires=${new Date(Date.now() + 604800000).toUTCString()}`; // expire dans 7 jours
-
-            alert('Vous êtes bien connecté');
+        if (response.ok) {
+            // Utilisateur créé avec succès
+            alert('Utilisateur créé avec succès');
 
             const resultContainer = document.getElementById('result');
             resultContainer.innerHTML = redirectButtons;
         } else {
-            alert('Échec de la connexion');
+            // Si le serveur renvoie un statut d'erreur
+            const errorData = await response.json();
+            alert(`Erreur du serveur: ${errorData.error}`);
         }
     } catch (error) {
         console.error('Erreur : ' + error.stack);
