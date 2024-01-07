@@ -31,8 +31,8 @@ exports.createUser = async (req, res) => {
 
 exports.register = async (req, res) => {
     try {
-        const { nom, prenom, email, mdp } = req.body;
-
+        const { nom, prenom, email, password } = req.body;
+        console.log(req.body)
         // Vérifier si l'utilisateur existe déjà dans la base de données
         const existingUser = await User.findOne({
             where: {
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
         }
 
         // Utiliser bcrypt pour hacher le mot de passe
-        const hashMDP = await bcrypt.hash(mdp, 10);
+        const hashMDP = await bcrypt.hash(password, 10);
 
         // Envoyer les informations en base de données
         await User.create({
@@ -57,7 +57,7 @@ exports.register = async (req, res) => {
 
         // Renvoyer le jeton pour l'authentification
         const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-        res.status(201).json({ token });
+        res.redirect('/')
     } catch (error) {
         console.error('Erreur lors de l\'enregistrement:', error);
         res.status(500).json({ error: 'Erreur lors de l\'enregistrement' });
@@ -66,8 +66,8 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const { email, mdp } = req.body;
-
+        const { email, password } = req.body;
+        console.log(req.body)
         // Recherche de l'utilisateur par email dans la base de données
         const user = await User.findOne({
             where: {
@@ -78,23 +78,19 @@ exports.login = async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: "Utilisateur non existant" });
         }
-
         // Comparaison du mot de passe avec celui stocké en base de données avec bcrypt
-        const samePwd = await bcrypt.compare(mdp, user.mdp);
+        console.log(password +" "+user.mdp)
+
+        const samePwd = await bcrypt.compare(password, user.mdp);
 
         if (!samePwd) {
             return res.status(401).json({ error: "Mot de passe incorrect" });
         }
-
         // Renvoie du jeton JWT pour l'authentification
         const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-        res.json({ token });
+        res.redirect('/')
     } catch (error) {
         console.error('Erreur lors de la connexion:', error);
-        res.status(500).json({ error: 'Erreur lors de la connexion' });
+        res.status(500).json({ error: 'Erreur lors de la connexion 1' });
     }
 };
-
-
-
-
