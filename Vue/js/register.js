@@ -11,6 +11,7 @@ document.getElementById('RegisterForm').addEventListener('submit', async functio
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
             },
             body: JSON.stringify({
                 nom: nom,
@@ -23,10 +24,11 @@ document.getElementById('RegisterForm').addEventListener('submit', async functio
         const data = await response.json();
 
         if (data.token) {
+            localStorage.setItem('jwtToken', data.token);
             // Stocker le token dans un cookie
             document.cookie = `jwtToken=${data.token}; path=/; expires=${new Date(Date.now() + 604800000).toUTCString()}`; // expire dans 7 jours
 
-            alert('Votre compte a bien été créé');
+            alert('Vous êtes bien connecté');
 
             const resultContainer = document.getElementById('result');
             resultContainer.innerHTML = redirectButtons;

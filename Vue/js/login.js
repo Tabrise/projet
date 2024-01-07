@@ -9,6 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
             },
             body: JSON.stringify({
                 email: email,
@@ -19,6 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
 
         if (data.token) {
+            localStorage.setItem('jwtToken', data.token);
             // Stocker le token dans un cookie
             document.cookie = `jwtToken=${data.token}; path=/; expires=${new Date(Date.now() + 604800000).toUTCString()}`; // expire dans 7 jours
 

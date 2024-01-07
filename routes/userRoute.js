@@ -5,10 +5,13 @@ const middleware = require('../middleware/middleware')
 
 
 
-router.get('/getUser', middleware.authenticator, userController.getAllUser)
+router.get('/getUser', userController.getAllUser)
 router.post('/create', userController.createUser)
 router.post('/register', userController.register)
 router.post('/login', userController.login)
+router.get('/', middleware.authenticator, (req, res) => {
+    res.sendFile(__dirname + "/vue/admin.html");
+});
 
 
 module.exports = router;

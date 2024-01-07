@@ -1,50 +1,42 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
-const db = require('../database/db')
-const Cookies = require('cookies')
+const jwt = require('jsonwebtoken');
+const { User } = require('../modele/User');
+const db = require('../database/db');
+require('dotenv').config();
 
+exports.authenticator = async (req, res, next) => {
+    try {
+        const token = req.cookies['jwtToken'];
+        console.log("token:",token);
+        if (!token || !process.env.SECRET_KEY) {
+            return res.status(401).json({ erreur: "Accès refusé, jeton invalide" });
+        }
 
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
+        const result = await db.query('SELECT isAdmin, isComptable FROM user WHERE email = ?', {
+            replacements: [decoded.email], // Utilisez un tableau avec le paramètre de l'email
+            type: db.QueryTypes.SELECT
+        });
+        
 
-exports.authenticator = (req, res, next) => {
-    const cookies = new Cookies(req, res)
-    const token = req.headers.authorization === undefined ? cookies.get('token') : req.headers.authorization
-    if (token && process.env.SECRET_KEY) {
-        jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {
-            // si problème => erreur
-            if (err) {
-                res.status(401).json({ erreur: "accès refusé " + err })
-            }
-            // décoder => next()
-            else {
-                cookies.set('email', decoded.email)
-                next()
-            }
-        })
-    } else {
-        res.status(401).json({ erreur: "accès refusé" })
+        if (result.length === 0) {
+            return res.status(401).json({ erreur: "Accès refusé, user introuvable" });
+        }
+
+        const user = result[0];
+
+        if (user.isAdmin === 1 || user.isComptable === 1) {
+            console.log("token:",token);
+            req.user = user;
+            next();
+        } else {
+            res.status(403).json({ erreur: 'Accès refusé, droits insuffisants' });
+        }
+    } catch (error) {
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({ erreur: "Accès refusé, jeton invalide" });
+        }
+        console.error(error);
+        res.status(500).json({ erreur: "Erreur interne du serveur" });
     }
-}
-
-exports.isAdmin = async (req, res) => {
-    const email = cookies.get('email', { signed: true })
-    const result = await db.query('SELECT isAdmin FROM user where email= ?', [email])
-    if (result.length === 1 && (result[0].isAdmin === 1)) {
-        next()
-    }
-    else {
-        res.status(403).json({ erreur: "access denied" })
-    }
-}
-
-exports.isComptable = async (req, res) => {
-    const email = cookies.get('email', { signed: true })
-    const result = await db.query('SELECT isComptable FROM user where email= ?', [email])
-    if (result.length === 1 && (result[0].isComptable === 1)) {
-        next()
-    }
-    else {
-        res.status(403).json({ erreur: "access denied" })
-    }
-
-}
+};
