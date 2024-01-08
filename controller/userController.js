@@ -59,7 +59,7 @@ exports.register = async (req, res) => {
 
         // Renvoyer le jeton pour l'authentification
         const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-        res.status(201).json({ token });
+        res.redirect('/')
     } catch (error) {
         console.error('Erreur lors de l\'enregistrement:', error);
         res.status(500).json({ error: 'Erreur lors de l\'enregistrement' });
