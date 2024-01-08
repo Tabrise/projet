@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <!-- Image de la voiture -->
-                <img src="../Vue/img/carousel-1.png" alt="Image de la voiture" class="img-fluid">
+                <!-- <img src="../../Vue/img/carousel-1.png" alt="Image de la voiture" class="img-fluid"> -->
             </div>
         </div>
     </div>
@@ -20,8 +20,8 @@
                 </tr>
             </thead>
             <tbody>
-                <% voiture.forEach(el=> {%>
-                    <tr>
+                <% voiture.forEach((el,id)=> {%>
+                    <tr id="<%= el.id %>" >
                         <td>
                             <%= el.nom %>
                         </td>
@@ -30,22 +30,35 @@
                             <%= el.prix %>€
                         </td>
                         <td>
-                            <div style="text-align: center;">
+                            <div style="text-align: center;" onclick="ajouter(this)">
                                 <i class="fas fa-plus-circle" style="font-size: 1.5rem;"></i>
                             </div>
                         </td>
                     </tr>
                     <% }) %>
-
-                        <!-- Ajoutez plus de lignes au besoin pour chaque mois -->
             </tbody>
         </table>
-
-        <!-- Icône "+" -->
-
     </div>
-
-
+    <div class="container mt-5">
+        <h2>Total</h2>
+        <h3 id="total">0€</h3>
+    </div>
 </body>
 
+<script> 
+let panier= {}
+function ajouter(el){
+    el = el.parentElement.parentElement
+    let calcul = 0
+    const article = el.childNodes[1].innerHTML
+    if (!panier[article]){
+        panier[article] = parseInt(el.childNodes[5].innerHTML);
+        for(let article in panier){
+            calcul += panier[article]
+        }  
+        document.getElementById('total').innerHTML = calcul+"€"
+    }
+}
+
+</script>
 </html>

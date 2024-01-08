@@ -32,7 +32,7 @@ exports.findVoiture = async(req,res)=>{
 }
 
 exports.getVoiture = async(req,res)=>{
-    const voiture = await Voiture.findAll({
+    const voiture = await Voiture.find({
         where: {ModeleId: parseInt(req.params.idModele) },
       });
       console.log(voiture)

@@ -4,7 +4,7 @@ exports.CreateModele = async(req,res)=>{
     let modele = req.body
     let result = await Modele.create(modele)
     result.save()
-    res.statuts(201).json(result.nom)
+    res.redirect('/index/')
 }
 
 exports.UpdateModel = async(req, res)=>{
