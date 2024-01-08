@@ -14,14 +14,10 @@ app.use(cors())
 app.use(express.json());       
 app.use(express.urlencoded({extended: true})); 
 app.use(express.static(path.join(__dirname, 'Vue')));
+app.use('/', modeleRoute)
 app.use('/database', databaseRoute)
-app.use('/modele', modeleRoute)
-app.use('/', adminRoute)
+app.use('/admin', adminRoute)
 app.use('/user', userRoute)
 app.use('/achat', achatRoute)
-
-app.get("/", (req, res) => {
-    res.sendFile(__dirname+"/vue/index.html");// *<- ici mathieu
-});
 
 app.listen(8000,()=>{console.log("Serveur à l'écoute")})

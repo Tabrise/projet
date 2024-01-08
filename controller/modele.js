@@ -21,7 +21,8 @@ exports.UpdateModel = async(req, res)=>{
 
 exports.allModele = async (req,res)=>{
     const modele= await Modele.findAll()
-    res.statuts(200).json(modele)
+    console.log(modele)
+    res.render('index' ,{ modeles:modele})
 }
 
 exports.findModele = async(req,res)=>{
