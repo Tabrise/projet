@@ -22,7 +22,6 @@ exports.UpdateAchat = async(req, res)=>{
 
 exports.allAchat = async (req,res)=>{
     const achat= await Achat.findAll()
-    console.log(achat)
     const mois = await Achat.findAll({
         attributes: [
             [sequelize.fn('MONTH', sequelize.col('dateAchat')), 'Mois'],
@@ -31,8 +30,6 @@ exports.allAchat = async (req,res)=>{
           ],
           group: [sequelize.fn('YEAR', sequelize.col('dateAchat')), sequelize.fn('MONTH', sequelize.col('dateAchat'))],
     })
-    console.log(mois)
-
     res.render('admin', {achats:achat , mois:mois}) 
 }
 

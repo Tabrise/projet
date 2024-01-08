@@ -22,7 +22,7 @@ exports.UpdateModel = async(req, res)=>{
 exports.allModele = async (req,res)=>{
     const modele= await Modele.findAll()
     console.log(modele)
-    res.render('index.ejs' ,{ modeles:modele})
+    res.render('index.ejs' ,{modeles:modele})
 }
 
 exports.findModele = async(req,res)=>{

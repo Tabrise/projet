@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <!-- ... (votre section head actuelle) ... -->
-</head>
-
 <body>
-
-    <!-- Navbar Start -->
-    <!-- ... (votre section navbar actuelle) ... -->
-    <!-- Navbar End -->
-
     <!-- Section des détails de la voiture -->
     <div class="container mt-5">
         <div class="row">
@@ -18,25 +6,31 @@
                 <!-- Image de la voiture -->
                 <img src="../Vue/img/carousel-1.png" alt="Image de la voiture" class="img-fluid">
             </div>
-            <div class="col-md-6">
-                <!-- Détails de la voiture -->
-                <h2><%= modele.nom %></h2>
-                <p><strong>Prix :</strong> <%= modele.prixVoiture %></p>
-                <p><strong>Moteur :</strong> <%= modele.Moteur %></p>
-                <p><strong>Transmission :</strong> Automatique</p>
-                <p><strong>Vitesse maximale :</strong> 150 km/h</p>
-                <p><strong>Accélération (0-100 km/h) :</strong> 4,5 secondes</p>
-                <p><strong>Consommation :</strong> <%= modele.Consomation %> </p>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <h3>Options</h3>
-                <p><%= options.id %></p>
-            </div>
         </div>
     </div>
-
+    <div class="container mt-5">
+        <h2>Options de ce modéle :</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Options</th>
+                    <th scope="col">Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% voiture.forEach(el =>{%>
+                    <tr>
+                        <td><%= el.nom %></td>
+                        <td>GPS</td>
+                        <td><%= el.prix %>€</td>
+                    </tr>
+                <%})%>
+              
+                <!-- Ajoutez plus de lignes au besoin pour chaque mois -->
+            </tbody>
+        </table>
+    </div>
 
 </body>
 
