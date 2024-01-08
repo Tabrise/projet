@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../modele/User');
 const db = require('../database/db');
+const Cookies = require('cookies');
 require('dotenv').config();
 
 exports.authenticator = async (req, res, next) => {
     try {
-        const token = req.cookies['jwtToken'];
-        console.log("token:",token);
+        const cookies = new Cookies(req, res)
+        const token = cookies.get('jwtToken');
         if (!token || !process.env.SECRET_KEY) {
-            return res.status(401).json({ erreur: "Accès refusé, jeton invalide" });
+            return res.status(401).json({ erreur: "Accès refusé, jeton invalide svp" });
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -17,7 +18,7 @@ exports.authenticator = async (req, res, next) => {
             replacements: [decoded.email], // Utilisez un tableau avec le paramètre de l'email
             type: db.QueryTypes.SELECT
         });
-        
+
 
         if (result.length === 0) {
             return res.status(401).json({ erreur: "Accès refusé, user introuvable" });
@@ -26,7 +27,7 @@ exports.authenticator = async (req, res, next) => {
         const user = result[0];
 
         if (user.isAdmin === 1 || user.isComptable === 1) {
-            console.log("token:",token);
+            console.log("token:", token);
             req.user = user;
             next();
         } else {

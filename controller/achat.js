@@ -22,7 +22,18 @@ exports.UpdateAchat = async(req, res)=>{
 
 exports.allAchat = async (req,res)=>{
     const achat= await Achat.findAll()
-    res.statuts(200).json(achat)
+    console.log(achat)
+    const mois = await Achat.findAll({
+        attributes: [
+            [sequelize.fn('MONTH', sequelize.col('dateAchat')), 'Mois'],
+            [sequelize.fn('YEAR', sequelize.col('dateAchat')), 'Annee'],
+            [sequelize.fn('SUM', sequelize.col('prix')), 'SommeTotalAchat']
+          ],
+          group: [sequelize.fn('YEAR', sequelize.col('dateAchat')), sequelize.fn('MONTH', sequelize.col('dateAchat'))],
+    })
+    console.log(mois)
+
+    res.render('admin', {achats:achat , mois:mois}) 
 }
 
 exports.findAchat = async(req,res)=>{
@@ -33,17 +44,11 @@ exports.findAchat = async(req,res)=>{
 exports.delete = async(req,res)=>{
     const achat = await Achat.finAchatyPk(parseInt(req.params.id))
     await achat.destroy()
+    res.status(200).json(achat)
 }
 
 exports.totalMensuel = async(req,res)=>{
-    const achat = await Achat.findAll({
-        attributes: [
-            [sequelize.fn('MONTH', sequelize.col('dateAchat')), 'Mois'],
-            [sequelize.fn('YEAR', sequelize.col('dateAchat')), 'Annee'],
-            [sequelize.fn('SUM', sequelize.col('prix')), 'SommeTotalAchat']
-          ],
-          group: [sequelize.fn('YEAR', sequelize.col('dateAchat')), sequelize.fn('MONTH', sequelize.col('dateAchat'))],
-    })
+    
     res.status(200).json(achat)
 }
 
