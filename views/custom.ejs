@@ -9,28 +9,42 @@
         </div>
     </div>
     <div class="container mt-5">
-        <h2>Options de ce modéle :</h2>
+        <h2>Options de ce modèle :</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Options</th>
                     <th scope="col">Prix</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <% voiture.forEach(el =>{%>
+                <% voiture.forEach(el=> {%>
                     <tr>
-                        <td><%= el.nom %></td>
+                        <td>
+                            <%= el.nom %>
+                        </td>
                         <td>GPS</td>
-                        <td><%= el.prix %>€</td>
+                        <td>
+                            <%= el.prix %>€
+                        </td>
+                        <td>
+                            <div style="text-align: center;">
+                                <i class="fas fa-plus-circle" style="font-size: 1.5rem;"></i>
+                            </div>
+                        </td>
                     </tr>
-                <%})%>
-              
-                <!-- Ajoutez plus de lignes au besoin pour chaque mois -->
+                    <% }) %>
+
+                        <!-- Ajoutez plus de lignes au besoin pour chaque mois -->
             </tbody>
         </table>
+
+        <!-- Icône "+" -->
+
     </div>
+
 
 </body>
 
