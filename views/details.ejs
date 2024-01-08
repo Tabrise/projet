@@ -19,9 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -55,17 +55,16 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="chemin_vers_image_voiture.jpg" alt="Image de la voiture" class="img-fluid">
+                <img src="../Vue/img/carousel-1.png" alt="Image de la voiture" class="img-fluid">
             </div>
             <div class="col-md-6">
-                <%= modele  %>
                 <h2><%= modele.nom %></h2>
-                <p><strong>Prix :</strong> <%= modele.prix %></p>
-                <p><strong>Moteur :</strong> <%= modele.moteur %></p>
+                <p><strong>Prix :</strong> <%= modele.prixVoiture %></p>
+                <p><strong>Moteur :</strong> <%= modele.Moteur %></p>
                 <p><strong>Transmission :</strong> Automatique</p>
                 <p><strong>Vitesse maximale :</strong> 150 km/h</p>
                 <p><strong>Accélération (0-100 km/h) :</strong> 4,5 secondes</p>
-                <p><strong>Consommation :</strong> <%= modele.consomation %> </p>
+                <p><strong>Consommation :</strong> <%= modele.Consomation %> </p>
                 <button class="btn btn-danger">Ajouter des options</button>
                 <!-- Ajoutez d'autres caractéristiques au besoin -->
             </div>
@@ -79,7 +78,6 @@
     </div>
 
     <!-- Scripts JavaScript et Bootstrap JS -->
-    <script src="js/admin.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.min.js"></script>
     <!-- Ajoutez d'autres scripts au besoin -->

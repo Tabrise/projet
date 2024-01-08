@@ -3,7 +3,7 @@ const route = express.Router()
 const modelController = require('../controller/modele')
 
 route.post('/create',modelController.CreateModele)
-route.get('/all',modelController.allModele)
-route.get('/modele/:id',modelController.findModele)
+route.get('/',modelController.allModele)
+route.get('/:idModele',modelController.findModele)
 
 module.exports = route

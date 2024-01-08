@@ -9,7 +9,7 @@ const userRoute = require('./routes/userRoute')
 const achatRoute = require('./routes/achat')
 
 app.set('view engine', 'ejs');
-app.set(-'vue','./vue')
+app.set(-'view','/views')
 app.use(cors())
 app.use(express.json());       
 app.use(express.urlencoded({extended: true})); 

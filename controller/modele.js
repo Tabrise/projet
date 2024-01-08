@@ -26,10 +26,8 @@ exports.allModele = async (req,res)=>{
 }
 
 exports.findModele = async(req,res)=>{
-    const modele = await Modele.findByPk(req.params.id)
-    console.log(req.params.id)
+    const modele = await Modele.findByPk(parseInt(req.params.idModele))
     res.render('details' ,{ modele:modele})
-
 }
 
 exports.delete = async(req,res)=>{
