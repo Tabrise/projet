@@ -24,6 +24,7 @@ app.use('/admin', adminRoute)
 app.use('/user', userRoute)
 app.use('/achat', achatRoute)
 app.use('/voiture', voitureRoute)
+app.use('/modele', modeleRoute)
 
 app.get("/",(req,res)=>{
     res.redirect('/index/')

@@ -50,6 +50,37 @@
         </table>
     </div>
 
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2>Ajouter un modèle</h2>
+                <form method="post" action="/modele/create">
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Nom:</label>
+                        <input type="text" id="nom" class="form-control" name="nom" placeholder="nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Prix</label>
+                        <input type="number" name="prixVoiture" class="form-control" id="prixVoiture" placeholder="Prix">
+                    </div>
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Moteur :</label>
+                        <input type="text" name="Moteur" class="form-control" id="Moteur" placeholder="Moteur">
+                    </div>
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Consomation :</label>
+                        <input type="text" name="Consomation" class="form-control" id="Consomation" placeholder="Consomation">
+                    </div>
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Description :</label>
+                        <input type="text" name="Description" class="form-control" id="Description" placeholder="Descrption">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter modèle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Scripts JavaScript et Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
