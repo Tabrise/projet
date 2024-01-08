@@ -4,5 +4,6 @@ const modelController = require('../controller/modele')
 
 route.post('/create',modelController.CreateModele)
 route.get('/all',modelController.allModele)
+route.get('/modele/:id',modelController.findModele)
 
 module.exports = route

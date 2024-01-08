@@ -26,11 +26,13 @@ exports.allModele = async (req,res)=>{
 }
 
 exports.findModele = async(req,res)=>{
-    const modele = await Modele.findByPk(parseInt(req.params.id))
-    res.status(200).json(modele)
+    const modele = await Modele.findByPk(req.params.id)
+    console.log(req.params.id)
+    res.render('details' ,{ modele:modele})
+
 }
 
 exports.delete = async(req,res)=>{
-    const modele = await Modele.findByPk(parseInt(req.params.id))
+    const modele = await Modele.findByPk(req.params.id)
     await modele.destroy()
 }

@@ -6,6 +6,6 @@ const achatController = require('../controller/achat')
 
 
 // Route pour la page d'administration
-router.get('/achat', middleware.authenticator,achatController.allAchat);
+router.get('/', middleware.authenticator,achatController.allAchat);
 
 module.exports = router;
